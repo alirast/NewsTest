@@ -87,8 +87,10 @@ class DetailViewController: UIViewController {
     @objc func addToFavourite() {
         print("added to favourite")
         presenter.addToFavourite(link: detailLinkLabel.text)
+        presenter.addAuthor(author: detailAuthorLabel.text)
+        presenter.addDescription(description: detailDescriptionLabel.text)
+        presenter.addImage(image: detailNewsImageView.image)
         
-      
     }
     
     func showAlert(_ title: String) {

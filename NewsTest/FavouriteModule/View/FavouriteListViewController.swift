@@ -36,7 +36,13 @@ extension FavouriteListViewController: UITableViewDelegate {
         print("cell tapped")
         let selected = FavouriteListManager.shared.favLink[indexPath.row]
         print(selected)
-        let detailVC = ModuleBuilder.createDetailViewController(article: Article(source: Source(name: ""), author: nil, title: "", description: nil, url: selected, urlToImage: nil, publishedAt: ""))
+        let selectedAuthor = FavouriteListManager.shared.favAuthor[indexPath.row]
+        let selectedDescription = FavouriteListManager.shared.favouritedNewsArray[indexPath.row]
+        let selectedImage = FavouriteListManager.shared.favImage[indexPath.row]
+        
+
+        
+        let detailVC = ModuleBuilder.createDetailViewController(article: Article(source: Source(name: ""), author: selectedAuthor, title: "", description: selectedDescription, url: selected, urlToImage: nil, publishedAt: ""))
         navigationController?.pushViewController(detailVC, animated: true)
         favouriteTableView.deselectRow(at: indexPath, animated: true)
     }
@@ -49,7 +55,7 @@ extension FavouriteListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = favouriteTableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
-        cell.textLabel?.text = FavouriteListManager.shared.favLink[indexPath.row]
+        cell.textLabel?.text = FavouriteListManager.shared.favouritedNewsArray[indexPath.row]
         return cell
     }
 }
