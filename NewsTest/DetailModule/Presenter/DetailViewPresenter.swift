@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum Favourite: String {
+    case added = "Добавлено в избранное"
+    case removed = "Убрано из избранного"
+}
+
 protocol DetailViewProtocol: AnyObject {
     func setArticle(article: Article?)
     func showAlert(_ title: String)
@@ -47,10 +52,10 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
             
             if isFavedLink {
                 FavouriteListManager.shared.removeLink(link)
-                view?.showAlert("Убрано")
+                view?.showAlert(Favourite.removed.rawValue)
             } else {
                 FavouriteListManager.shared.addFavLink(link)
-                view?.showAlert("Добавлено")
+                view?.showAlert(Favourite.added.rawValue)
             }
         }
     }
@@ -60,10 +65,10 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
             let isFavedAuthor = FavouriteListManager.shared.favAuthor.contains(author)
             if isFavedAuthor {
                 FavouriteListManager.shared.removeAuthor(author)
-                view?.showAlert("Убрано")
+                view?.showAlert(Favourite.removed.rawValue)
             } else {
                 FavouriteListManager.shared.addFavAuthor(author)
-                view?.showAlert("Добавлено")
+                view?.showAlert(Favourite.added.rawValue)
             }
         }
     }
@@ -73,10 +78,10 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
             let isFavedDescription = FavouriteListManager.shared.favouritedNewsArray.contains(description)
             if isFavedDescription {
                 FavouriteListManager.shared.removeNews(description)
-                view?.showAlert("Убрано")
+                view?.showAlert(Favourite.removed.rawValue)
             } else {
                 FavouriteListManager.shared.addFavouriteNews(description)
-                view?.showAlert("Добавлено")
+                view?.showAlert(Favourite.added.rawValue)
             }
         }
     }
@@ -86,10 +91,10 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
             let isFavedImage = FavouriteListManager.shared.favImage.contains(image)
             if isFavedImage {
                 FavouriteListManager.shared.removeImage(image)
-                view?.showAlert("Убрано")
+                view?.showAlert(Favourite.removed.rawValue)
             } else {
                 FavouriteListManager.shared.addFavImage(image)
-                view?.showAlert("Добавлено")
+                view?.showAlert(Favourite.added.rawValue)
             }
         }
     }
