@@ -1,0 +1,58 @@
+//
+//  FavouriteListViewController.swift
+//  NewsTest
+//
+//  Created by N S on 14.07.2023.
+//
+
+import UIKit
+
+class FavouriteListViewController: UIViewController {
+
+    var favouriteTableView = UITableView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemPink
+        view.addSubview(favouriteTableView)
+        favouriteTableView.register(UITableViewCell.self, forCellReuseIdentifier: "favCell")
+        favouriteTableView.delegate = self
+        favouriteTableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favouriteTableView.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        favouriteTableView.frame = view.bounds
+    }
+}
+
+extension FavouriteListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("cell tapped")
+        let selected = FavouriteListManager.shared.favLink[indexPath.row]
+        print(selected)
+        let detailVC = ModuleBuilder.createDetailViewController(article: Article(source: Source(name: ""), author: nil, title: "", description: nil, url: selected, urlToImage: nil, publishedAt: ""))
+        navigationController?.pushViewController(detailVC, animated: true)
+        favouriteTableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension FavouriteListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return FavouriteListManager.shared.favLink.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*let cell = favouriteTableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
+        cell.textLabel?.text = "text"
+        return cell*/
+        let cell = favouriteTableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
+        cell.textLabel?.text = FavouriteListManager.shared.favLink[indexPath.row]
+        return cell
+    }
+}
