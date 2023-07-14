@@ -16,7 +16,7 @@ protocol DetailViewPresenterProtocol: AnyObject {
     init(view: DetailViewProtocol, networkService: NetworkServiceProtocol, article: Article?)
     func setArticle()
     func addToFavourite(link: String?)
-    func addToFavour(article: Article?)
+   
 }
 
 class DetailViewPresenter: DetailViewPresenterProtocol {
@@ -34,9 +34,7 @@ class DetailViewPresenter: DetailViewPresenterProtocol {
         self.view?.setArticle(article: article)
     }
     
-    public func addToFavour(article: Article?) {
-        print("article\(article)")
-    }
+  
     
     public func addToFavourite(link: String?) {
         if let link = link {
