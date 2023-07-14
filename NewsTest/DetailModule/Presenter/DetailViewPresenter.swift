@@ -13,6 +13,7 @@ protocol DetailViewProtocol: AnyObject {
 }
 
 protocol DetailViewPresenterProtocol: AnyObject {
+    var article: Article? { get set }
     init(view: DetailViewProtocol, networkService: NetworkServiceProtocol, article: Article?)
     func setArticle()
     func addToFavourite(link: String?)

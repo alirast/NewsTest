@@ -48,9 +48,6 @@ extension FavouriteListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*let cell = favouriteTableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
-        cell.textLabel?.text = "text"
-        return cell*/
         let cell = favouriteTableView.dequeueReusableCell(withIdentifier: "favCell", for: indexPath)
         cell.textLabel?.text = FavouriteListManager.shared.favLink[indexPath.row]
         return cell
